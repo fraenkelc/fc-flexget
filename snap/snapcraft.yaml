@@ -1,0 +1,36 @@
+name: fc-flexget
+summary: flexget
+description: |
+  FlexGet is a multipurpose automation tool for all of your media
+  Support for torrents, nzbs, podcasts, comics, TV, movies, RSS, HTML, CSV, and more.
+base: core20
+confinement: strict
+grade: stable
+adopt-info: flexget
+
+parts:
+  flexget:
+    plugin: python
+    source: .
+    python-packages:
+    - wheel
+    requirements:
+    - requirements.txt 
+    override-build: |
+      snapcraftctl build
+      snapcraftctl set-version $( pip show flexget |grep Version: |cut -f2 -d' ' )
+
+
+apps:
+  flexget:
+    command: bin/flexget
+  flexget-daemon:
+    command: bin/flexget daemon start
+    stop-command: bin/flexget daemon stop
+    daemon: simple
+    restart-condition: on-failure
+    plugs:
+    - network
+    - network-bind
+    passthrough:
+      daemon-scope: user
