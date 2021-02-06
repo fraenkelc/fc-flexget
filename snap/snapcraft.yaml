@@ -23,14 +23,14 @@ parts:
 
 apps:
   flexget:
-    command: bin/flexget
+    command: bin/flexget -c $SNAP_DATA/flexget/config.yml
+    plugs:
+    - network 
   flexget-daemon:
-    command: bin/flexget daemon start
+    command: bin/flexget -c $SNAP_DATA/flexget/config.yml daemon start
     stop-command: bin/flexget daemon stop
     daemon: simple
     restart-condition: on-failure
     plugs:
     - network
     - network-bind
-    passthrough:
-      daemon-scope: user
