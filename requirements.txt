@@ -1,4 +1,4 @@
 transmission-rpc
 deluge-client
 cloudscraper
-flexget == 3.5.17
+flexget == 3.5.19
