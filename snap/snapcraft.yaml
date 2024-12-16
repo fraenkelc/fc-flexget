@@ -3,7 +3,7 @@ summary: flexget
 description: |
   FlexGet is a multipurpose automation tool for all of your media
   Support for torrents, nzbs, podcasts, comics, TV, movies, RSS, HTML, CSV, and more.
-base: core20
+base: core24
 confinement: strict
 grade: stable
 adopt-info: flexget
@@ -12,9 +12,7 @@ parts:
   flexget:
     plugin: python
     source: .
-    python-packages:
-    - wheel
-    requirements:
+    python-requirements:
     - requirements.txt 
     override-build: |
       snapcraftctl build
